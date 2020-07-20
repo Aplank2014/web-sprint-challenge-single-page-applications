@@ -11,7 +11,11 @@ export default function Form(props) {
     size: "",
     toppings: {
       pepperoni: false,
+      sausage: false,
       olives: false,
+      onions: false,
+      tomatoes: false,
+      hamburger: false,
       mushrooms: false,
       extraCheese: false
     },
@@ -32,7 +36,7 @@ export default function Form(props) {
         .trim()
         .min(2, 'Name must be at least 2 characters long.')
         .required('Name is a required field.'),
-    size: yup.string().required('Select a size.'),
+    size: yup.string().required('Select size.'),
     specialInstructions: yup.string()
   });
 
@@ -115,24 +119,25 @@ export default function Form(props) {
     .then(valid => {
       setButtonDisabled(!valid)
     })
-  }, []);
+  }, [formState]);
 
   return (
     <form onSubmit={formSubmit}>
+      <label for="Name">Name:</label>
+      <br></br>
       <Input
         data-cy="name"
         type="text"
         name="name"
         onChange={inputChange}
         value={formState.name}
-        placeholder="Name"
         errors={errors}
       />
       <div className="pizza-size">
         <label htmlFor="size">
           Size:
           <Select data-cy="select-size" name="size" value={formState.size} onChange={inputChange} errors={errors}>
-            <option value="">--select a size--</option>
+            <option value="">--select size--</option>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
@@ -166,6 +171,54 @@ export default function Form(props) {
           />
         </label>
         <label>
+          Olives
+          <input
+            data-cy="olives"
+            type="checkbox"
+            name="olives"
+            checked={formState.toppings.olives}
+            onChange={onCheckboxChange}
+            value={formState.toppings}
+            errors={errors}
+          />
+        </label>
+        <label>
+          Onions
+          <input
+            data-cy="onions"
+            type="checkbox"
+            name="onions"
+            checked={formState.toppings.onions}
+            onChange={onCheckboxChange}
+            value={formState.toppings}
+            errors={errors}
+          />
+        </label> 
+        <label>
+         Tomatoes
+          <input
+            data-cy="tomatoes"
+            type="checkbox"
+            name="tomatoes"
+            checked={formState.toppings.tomatoes}
+            onChange={onCheckboxChange}
+            value={formState.toppings}
+            errors={errors}
+          />
+        </label>
+        <label>
+          Hamburger
+          <input
+            data-cy="hamburger"
+            type="checkbox"
+            name="hamburger"
+            checked={formState.toppings.hamburger}
+            onChange={onCheckboxChange}
+            value={formState.toppings}
+            errors={errors}
+          />
+        </label>
+        <label>
           Mushroom
           <input
             data-cy="mushroom"
@@ -192,7 +245,7 @@ export default function Form(props) {
       </div>
       <div className="special-instructions">
         <label>
-          Special Instructions?
+          Special Instructions:
           <input
             data-cy="specialInstructions"
             type="text"

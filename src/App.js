@@ -13,7 +13,7 @@ const App = () => {
         <nav>
           <h1>Lambda Eats</h1>
           <div className='nav-link'>
-            <Link id='nav-home' to='/'>Home</Link>
+            <Link id='nav-home' to='/'style={{paddingLeft: 13, textDecoration: 'none' }} >Home</Link>
           </div>
         </nav>
       </div>
